@@ -1,0 +1,99 @@
+<h1>
+CloudBees Security Advisory 2018-10-29
+</h1>
+<p>
+This advisory announces vulnerabilities in
+<strong>
+Jenkins, CloudBees Jenkins Platform
+</strong>
+and
+<strong>
+CloudBees Jenkins Solutions.
+</strong>
+</p>
+<h3 id='SECURITY-1186'>
+Sandbox Bypass in Script Security and Pipeline Groovy Plugins
+</h3>
+<strong>
+SECURITY-1186
+/
+CVE-2018-1000865 (Script Security Plugin) and CVE-2018-1000866 (Pipeline: Groovy Plugin)
+
+</strong>
+<div class="paragraph">
+<p>The Groovy Sandbox library used by Script Security Plugin and Pipeline Groovy Plugin did not apply sandbox restrictions to finalize methods.
+This could be used to invoke arbitrary constructors and methods, bypassing sandbox protection.</p>
+</div>
+<div class="paragraph">
+<p>Finalize methods are now prohibited in classes subject to sandbox security.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+This may result in existing sandboxed scripts, such as pipelines, starting to fail if they use this language feature.
+</td>
+</tr>
+</table>
+</div>
+<h2>
+Severity
+</h2>
+<ul>
+<li>
+SECURITY-1186:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H'>
+high
+</a>
+</li>
+</ul>
+<h2>
+Fix
+</h2>
+<ul>
+<li>
+<strong>
+CloudBees Traditional Platforms
+</strong>
+should be upgraded 2.138.2.2-rev2
+</li>
+<li>
+<strong>
+CloudBees Cloud Platforms
+</strong>
+should be upgraded 2.138.2.2-rev2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Enterprise
+</strong>
+should be upgraded the Managed Masters and Operations Center to 2.138.2.2-rev2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(rolling train, CJP Operations Center and CJP Client Master (2.x.y.z) should be upgraded to version 2.138.2.2-rev2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(fixed train, CJP Operations Center and CJP Client Master (2.73.x.0.z) should be upgraded to version 2.107.35.0.1-rev2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Team
+</strong>
+should be upgraded to version 2.138.2.2-rev2
+</li>
+<li>
+<strong>
+DEV@cloud
+</strong>
+is already protected
+</li>
+</ul>

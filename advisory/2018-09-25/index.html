@@ -1,0 +1,721 @@
+<h1>
+CloudBees Security Advisory 2018-09-25
+</h1>
+<p>
+This advisory announces vulnerabilities in
+<strong>
+Jenkins, CloudBees Jenkins Platform
+</strong>
+and
+<strong>
+CloudBees Jenkins Solutions.
+</strong>
+</p>
+<h3 id='SECURITY-1101'>
+CSRF vulnerability in JUnit Plugin
+</h3>
+<strong>
+SECURITY-1101
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>A URL used to allow setting the description of a test object in JUnit Plugin did not require POST requests, resulting in a cross-site request forgery vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>That URL now requires POST requests be sent.</p>
+</div>
+<h3 id='SECURITY-1029'>
+CSRF vulnerability and missing permission checks in Jira Plugin allowed capturing credentials
+</h3>
+<strong>
+SECURITY-1029
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Jira Plugin did not perform permission checks on a method implementing form validation.
+This allowed users with Overall/Read access to Jenkins to connect to an attacker-specified URL using attacker-specified credentials IDs obtained through another method, capturing credentials stored in Jenkins.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this form validation method did not require POST requests, resulting in a cross-site request forgery vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This form validation method now require POST requests and Overall/Administer (for globally defined sites) or Item/Configure permissions (for sites defined for a folder).</p>
+</div>
+<h3 id='SECURITY-1080'>
+Stored XSS vulnerability in Config File Provider Plugin
+</h3>
+<strong>
+SECURITY-1080
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Config File Provider Plugin did not escape configuration file metadata, resulting in a stored cross-site scripting (XSS) vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>Config File Provider Plugin now escapes configuration file metadata shown on the Jenkins UI.</p>
+</div>
+<h3 id='SECURITY-938'>
+CSRF vulnerability in Config File Provider Plugin
+</h3>
+<strong>
+SECURITY-938
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>A URL used to save configuration files based on form submissions did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This URL now requires POST requests.</p>
+</div>
+<h3 id='SECURITY-130'>
+Stored XSS vulnerability in Rebuild Plugin
+</h3>
+<strong>
+SECURITY-130
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Rebuild Plugin did not escape parameter descriptions shown on the rebuild form page, resulting in a stored Cross-Site Scripting (XSS) vulnerability exploitable by users with the permission to configure jobs.</p>
+</div>
+<div class="paragraph">
+<p>Rebuild Plugin now applies the configured markup formatter to the parameter descriptions it displays.</p>
+</div>
+<h3 id='SECURITY-1130'>
+Reflected XSS vulnerability in Job Config History Plugin
+</h3>
+<strong>
+SECURITY-1130
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Job Config History Plugin did not escape some query parameters shown on its pages, resulting in a reflected cross-site scripting (XSS) vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>Job Config History Plugin now globally applies variable escaping to its pages.</p>
+</div>
+<h3 id='SECURITY-1125'>
+CSRF vulnerability in Email Extension Template Plugin
+</h3>
+<strong>
+SECURITY-1125
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Some URLs implementing form submission handling in Email Extension Template Plugin did not require POST requests, resulting in a CSRF vulnerability that allowed attackers to create or remove templates.</p>
+</div>
+<div class="paragraph">
+<p>These URLs now require POST requests.</p>
+</div>
+<h3 id='SECURITY-984 (1)'>
+CSRF vulnerability and missing permission checks in HipChat Plugin allowed capturing credentials
+</h3>
+<strong>
+SECURITY-984 (1)
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>HipChat Plugin did not perform permission checks on a method that sends test notifications.
+This allowed users with Overall/Read access to Jenkins to connect to an attacker-specified HipChat server using attacker-specified connection settings and credentials IDs obtained through another method, capturing credentials stored in Jenkins, and submitting messages to HipChat.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this form validation method did not require POST requests, resulting in a cross-site request forgery vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This form validation method now require POST requests and Overall/Administer permissions.</p>
+</div>
+<h3 id='SECURITY-984 (2)'>
+Unprivileged users with Overall/Read access are able to enumerate credential IDs in HipChat Plugin
+</h3>
+<strong>
+SECURITY-984 (2)
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>HipChat Plugin provides a list of applicable credential IDs to allow administrators configuring the plugin to select the one to use.</p>
+</div>
+<div class="paragraph">
+<p>This functionality did not check permissions, allowing any user with Overall/Read permission to get a list of valid credentials IDs.
+Those could be used as part of an attack to capture the credentials using another vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>An enumeration of credentials IDs in this plugin now requires Overall/Administer permission.</p>
+</div>
+<h3 id='SECURITY-1013 (1)'>
+Unprivileged users with Overall/Read access are able to enumerate credential IDs in Mesos Plugin
+</h3>
+<strong>
+SECURITY-1013 (1)
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Mesos Plugin provides a list of applicable credential IDs to allow administrators configuring the Mesos cloud to select the one to use.</p>
+</div>
+<div class="paragraph">
+<p>This functionality did not check permissions, allowing any user with Overall/Read permission to get a list of valid credentials IDs.
+Those could be used as part of an attack to capture the credentials using another vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>An enumeration of credentials IDs in this plugin now requires Overall/Administer permission.</p>
+</div>
+<h3 id='SECURITY-1013 (2)'>
+Server-side request forgery vulnerability in Mesos Plugin
+</h3>
+<strong>
+SECURITY-1013 (2)
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>A missing permission check in a form validation method in Mesos Plugin allowed users with Overall/Read permission to initiate a connection test, connecting to an attacker-specified URL.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this form validation method did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This form validation method now requires POST requests and Overall/Administer permissions.</p>
+</div>
+<h3 id='SECURITY-1067'>
+Server-side request forgery vulnerability in Crowd 2 Integration Plugin
+</h3>
+<strong>
+SECURITY-1067
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Crowd 2 Integration Plugin did not perform permission checks on a method implementing form validation.
+This allowed users with Overall/Read access to Jenkins to connect to an attacker-specified URL with attacker-specified credentials and connection settings.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this form validation method did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This form validation method now requires POST requests and Overall/Administer permissions.</p>
+</div>
+<h3 id='SECURITY-1068'>
+Crowd 2 Integration Plugin stored credentials in plain text
+</h3>
+<strong>
+SECURITY-1068
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Crowd 2 Integration Plugin stored the Crowd password unencrypted in its global configuration file on the Jenkins master.
+This password could be viewed by users with access to the master file system.</p>
+</div>
+<div class="paragraph">
+<p>The plugin now stores the password encrypted in the configuration files on disk and no longer transfers it to users viewing the configuration form in plain text.</p>
+</div>
+<h3 id='SECURITY-972'>
+CSRF vulnerability and missing permission checks in MQ Notifier Plugin
+</h3>
+<strong>
+SECURITY-972
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Users with Overall/Read permission were able to access MQ Notifier Plugin&#8217;s form validation URL, having it connect to an attacker-specified MQ system with attacker-specified credentials.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this form validation URL did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>The form validation now performs a permission check and requires POST requests to be sent.</p>
+</div>
+<h3 id='SECURITY-1075'>
+Stored XSS vulnerability in Metadata Plugin
+</h3>
+<strong>
+SECURITY-1075
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>A stored cross-site scripting (XSS) vulnerability in Metadata Plugin allows users with permission to change metadata definitions to insert arbitrary HTML/Javascript into Jenkins pages.</p>
+</div>
+<div class="paragraph">
+<p>As of publication of this advisory, there is no fix.</p>
+</div>
+<h3 id='SECURITY-1135'>
+Missing permission check in Metadata Plugin allows unauthorized users to change Metadata Plugin configuration
+</h3>
+<strong>
+SECURITY-1135
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Metadata Plugin lacks a permission check that allows users with Overall/Read access to Jenkins to change the plugin&#8217;s configuration.</p>
+</div>
+<div class="paragraph">
+<p>As of publication of this advisory, there is no fix.</p>
+</div>
+<h3 id='SECURITY-265'>
+Artifactory Plugin stored old directly entered credentials unencrypted on disk
+</h3>
+<strong>
+SECURITY-265
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Artifactory Plugin 2.4.0 introduced support for securely storing credentials using the Credentials Plugin.
+Old, insecurely stored credentials however were not removed when switching to this new system.</p>
+</div>
+<div class="paragraph">
+<p>Artifactory Plugin 2.16.2 and newer remove obsolete credentials stored in plain text when using the Credentials Plugin integration.</p>
+</div>
+<h3 id='SECURITY-813'>
+PAM Authentication Plugin did not properly validate user accounts
+</h3>
+<strong>
+SECURITY-813
+/
+CVE-2017-12197
+</strong>
+<div class="paragraph">
+<p>The pam4j library bundled in PAM Authentication Plugin had a bug that resulted in it not properly validating user accounts.</p>
+</div>
+<div class="paragraph">
+<p>The bundled version of the library was updated to include the fix for this.</p>
+</div>
+<h3 id='SECURITY-1163'>
+SonarQube Scanner Plugin stored server authentication token in plain text
+</h3>
+<strong>
+SECURITY-1163
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>SonarQube Scanner Plugin stored a server authentication token unencrypted in its global configuration file on the Jenkins master.
+This token could be viewed by users with access to the master file system.</p>
+</div>
+<div class="paragraph">
+<p>The plugin now stores the token encrypted in the configuration files on disk and no longer transfers it to users viewing the configuration form in plain text.</p>
+</div>
+<h3 id='SECURITY-1122'>
+Stored XSS vulnerability in Git Changelog Plugin
+</h3>
+<strong>
+SECURITY-1122
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Git Changelog Plugin did not escape the Git commit messages it displayed since version 1.48, resulting in a stored cross-site scripting (XSS) vulnerability exploitable by users with commit access to specific Git repositories.</p>
+</div>
+<div class="paragraph">
+<p>Git Changelog Plugin 2.7 and newer escape Git commit messages shown on the UI.</p>
+</div>
+<h3 id='SECURITY-948'>
+Arachni Scanner Plugin stored credentials in plain text
+</h3>
+<strong>
+SECURITY-948
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Arachni Scanner Plugin stored its password unencrypted in its global configuration file on the Jenkins master.
+This password could be viewed by users with access to the master file system.</p>
+</div>
+<div class="paragraph">
+<p>The plugin now integrates with <a href="https://plugins.jenkins.io/credentials">Credentials Plugin</a>.
+Existing configurations are migrated.</p>
+</div>
+<h3 id='SECURITY-1011 (1)'>
+CSRF vulnerability and missing permission checks in Argus Notifier Plugin allowed capturing credentials
+</h3>
+<strong>
+SECURITY-1011 (1)
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Argus Notifier Plugin did not perform permission checks on a method implementing form validation.
+This allowed users with Overall/Read access to Jenkins to connect to an attacker-specified URL using attacker-specified credentials IDs obtained through another method, capturing credentials stored in Jenkins.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this form validation method did not require POST requests, resulting in a cross-site request forgery vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This form validation method now require POST requests and Overall/Administer permission.</p>
+</div>
+<h3 id='SECURITY-1011 (2)'>
+Unprivileged users with Overall/Read access are able to enumerate credential IDs  in Argus Notifier Plugin
+</h3>
+<strong>
+SECURITY-1011 (2)
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Argus Notifier Plugin provides a list of applicable credential IDs to allow administrators configuring the plugin to select the one to use.</p>
+</div>
+<div class="paragraph">
+<p>This functionality did not check permissions, allowing any user with Overall/Read permission to get a list of valid credentials IDs.
+Those could be used as part of an attack to capture the credentials using another vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>An enumeration of credentials IDs in this plugin now requires Overall/Administer permission.</p>
+</div>
+<h3 id='SECURITY-1050 (1)'>
+CSRF vulnerability and missing permission checks in Chatter Notifier Plugin allowed capturing credentials
+</h3>
+<strong>
+SECURITY-1050 (1)
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Chatter Notifier Plugin did not perform permission checks on a method implementing form validation.
+This allowed users with Overall/Read access to Jenkins to connect to an attacker-specified URL using attacker-specified credentials IDs obtained through another method, capturing credentials stored in Jenkins.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this form validation method did not require POST requests, resulting in a cross-site request forgery vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This form validation method now require POST requests and Item/Configure permission on the job being configured.</p>
+</div>
+<h3 id='SECURITY-1050 (2)'>
+Unprivileged users with Overall/Read access are able to enumerate credential IDs  in Chatter Notifier Plugin
+</h3>
+<strong>
+SECURITY-1050 (2)
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Chatter Notifier Plugin provides a list of applicable credential IDs to allow users configuring the plugin&#8217;s functionality to select the one to use.</p>
+</div>
+<div class="paragraph">
+<p>This functionality did not check permissions, allowing any user with Overall/Read permission to get a list of valid credentials IDs.
+Those could be used as part of an attack to capture the credentials using another vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>An enumeration of credentials IDs in this plugin now requires Item/Configure permission for the job being configured.</p>
+</div>
+<h3 id='SECURITY-1065'>
+Dimensions Plugin stored credentials in plain text
+</h3>
+<strong>
+SECURITY-1065
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Dimensions Plugin stored a password unencrypted in its global configuration file on the Jenkins master.
+This password could be viewed by users with access to the master file system.</p>
+</div>
+<div class="paragraph">
+<p>The plugin now stores the password encrypted in the configuration files on disk and no longer transfers it to users viewing the configuration form in plain text.</p>
+</div>
+<h3 id='SECURITY-1108'>
+CSRF vulnerability and missing permission checks in Dimensions Plugin
+</h3>
+<strong>
+SECURITY-1108
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Users with Overall/Read permission were able to access Dimensions Plugin&#8217;s form validation URL, having it connect to an attacker-specified Dimensions system with attacker-specified credentials.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this form validation URL did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>The form validation now performs a permission check and requires POST requests to be sent.</p>
+</div>
+<h3 id='SECURITY-845'>
+Publish Over Dropbox Plugin stored credentials in plain text
+</h3>
+<strong>
+SECURITY-845
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Publish Over Dropbox Plugin stored authorization code and access code unencrypted in its global configuration file on the Jenkins master.
+These secrets could be viewed by users with access to the master file system.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, the authorization code was not masked from view using a password form field.</p>
+</div>
+<div class="paragraph">
+<p>The plugin now stores these secrets encrypted in the configuration files on disk and no longer transfers the authorization code to users viewing the configuration form in plain text.</p>
+</div>
+<h3 id='SECURITY-1156'>
+XML External Entity Processing Vulnerability in Monitoring Plugin
+</h3>
+<strong>
+SECURITY-1156
+/
+CVE-2018-15531
+</strong>
+<div class="paragraph">
+<p>The JavaMelody library bundled in Monitoring Plugin is affected by an XML External Entity (XXE) processing vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This allows attacker to send crafted requests to a web application for extraction of secrets from the file system, server-side request forgery, or denial-of-service attacks.</p>
+</div>
+<div class="paragraph">
+<p>Monitoring plugin 1.74 updates its JavaMelody dependency to fix the issue.</p>
+</div>
+<div class="paragraph">
+<p>The Jenkins security team and the maintainer of Monitoring Plugin have been unable to reproduce the issue in Jenkins, but we still recommend updating.</p>
+</div>
+<h2>
+Severity
+</h2>
+<ul>
+<li>
+SECURITY-130:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-265:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+low
+</a>
+</li>
+<li>
+SECURITY-813:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-845:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+low
+</a>
+</li>
+<li>
+SECURITY-938:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-948:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+low
+</a>
+</li>
+<li>
+SECURITY-972:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-984 (1):
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-984 (2):
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1011 (1):
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1011 (2):
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1013 (1):
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1013 (2):
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1029:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1050 (1):
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1050 (2):
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1065:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1067:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1068:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+low
+</a>
+</li>
+<li>
+SECURITY-1075:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:H/UI:R/S:C/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1080:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:H/UI:R/S:C/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1101:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:N/I:L/A:N'>
+low
+</a>
+</li>
+<li>
+SECURITY-1108:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1122:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:C/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1125:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1130:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1135:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1156:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+high
+</a>
+</li>
+<li>
+SECURITY-1163:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+low
+</a>
+</li>
+</ul>
+<h2>
+Fix
+</h2>
+<ul>
+<li>
+<strong>
+CloudBees Traditional Platforms
+</strong>
+should be upgraded 2.138.1.2
+</li>
+<li>
+<strong>
+CloudBees Cloud Platforms
+</strong>
+should be upgraded 2.138.1.2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Enterprise
+</strong>
+should be upgraded the Managed Masters and Operations Center to 2.138.1.2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(rolling train, CJP Operations Center and CJP Client Master (2.x.y.z) should be upgraded to version 2.138.1.2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(fixed train, CJP Operations Center and CJP Client Master (2.107.x.0.z) should be upgraded to version 2.107.34.0.1
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(fixed train, CJP Operations Center and CJP Client Master (2.73.x.0.z) should be upgraded to version 2.73.35.0.1
+</li>
+<li>
+<strong>
+CloudBees Jenkins Team
+</strong>
+should be upgraded to version 2.138.1.2
+</li>
+<li>
+<strong>
+DEV@cloud
+</strong>
+is already protected
+</li>
+</ul>
+<p>
+As of publication of this advisory, no fixes are available for the following plugins:
+</p>
+<ul>
+<li>
+Metadata
+Plugin
+</li>
+</ul>

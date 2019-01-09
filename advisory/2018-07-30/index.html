@@ -1,0 +1,455 @@
+<h1>
+CloudBees Security Advisory 2018-07-30
+</h1>
+<p>
+This advisory announces vulnerabilities in
+<strong>
+Jenkins, CloudBees Jenkins Platform
+</strong>
+and
+<strong>
+CloudBees Jenkins Solutions.
+</strong>
+</p>
+<h3 id='SECURITY-704'>
+SSH Agent Plugin could reveal SSH key passphrase when used inside pipeline
+</h3>
+<strong>
+SECURITY-704
+/
+CVE-2018-1999036
+</strong>
+<div class="paragraph">
+<p>When using the <code>sshagent</code> step inside a <code>withDockerContainer</code> block in Pipeline, the resulting logging of the <code>ssh-add</code> command included the SSH key passphrase in plain text.</p>
+</div>
+<div class="paragraph">
+<p>The plugin no longer logs the <code>ssh-add</code> invocation that would reveal the passphrase.</p>
+</div>
+<h3 id='SECURITY-997'>
+CSRF vulnerability and missing permission checks in Resource Disposer Plugin
+</h3>
+<strong>
+SECURITY-997
+/
+CVE-2018-1999037
+</strong>
+<div class="paragraph">
+<p>Resource Disposer Plugin did not perform permission checks on an API endpoint.
+This allowed users with Overall/Read access to Jenkins to stop tracking a specified resource.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this API endpoint did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This API endpoint now requires POST requests and Overall/Administer permissions.</p>
+</div>
+<h3 id='SECURITY-975'>
+CSRF vulnerability and missing permission checks in Publish Over CIFS Plugin
+</h3>
+<strong>
+SECURITY-975
+/
+CVE-2018-1999038
+</strong>
+<div class="paragraph">
+<p>Publish Over CIFS Plugin did not perform permission checks on a method implementing form validation.
+This allowed users with Overall/Read access to Jenkins to initiate CIFS connections to an attacker specified host.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this form validation method did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This form validation method now requires POST requests and Overall/Administer permissions.</p>
+</div>
+<h3 id='SECURITY-982'>
+CSRF vulnerability and missing permission checks in Confluence Publisher Plugin
+</h3>
+<strong>
+SECURITY-982
+/
+CVE-2018-1999039
+</strong>
+<div class="paragraph">
+<p>Confluence Publisher Plugin did not perform permission checks on a method implementing form validation.
+This allowed users with Overall/Read access to Jenkins to submit login requests to Confluence using attacker-specified credentials.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this form validation method did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This form validation method now require POST requests and Overall/Administer permissions.</p>
+</div>
+<h3 id='SECURITY-1016'>
+CSRF vulnerability and missing permission checks in Kubernetes Plugin allowed capturing credentials
+</h3>
+<strong>
+SECURITY-1016
+/
+CVE-2018-1999040
+</strong>
+<div class="paragraph">
+<p>Kubernetes Plugin did not perform permission checks on a method implementing form validation.
+This allowed users with Overall/Read access to Jenkins to connect to an attacker-specified Kubernetes cluster using attacker-specified credentials IDs obtained through another method, capturing credentials stored in Jenkins.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this form validation method did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This form validation method now requires POST requests and Overall/Administer permissions.</p>
+</div>
+<h3 id='SECURITY-840'>
+Tinfoil Security Plugin stored API Secret Key in plain text
+</h3>
+<strong>
+SECURITY-840
+/
+CVE-2018-1999041
+</strong>
+<div class="paragraph">
+<p>Tinfoil Security Plugin stored the API Secret Key in its configuration unencrypted in its global configuration file on the Jenkins master.
+This key could be viewed by users with access to the master file system.</p>
+</div>
+<div class="paragraph">
+<p>The plugin now integrates with <a href="https://plugins.jenkins.io/credentials">Credentials Plugin</a>.
+Existing configurations are not migrated and will need to be reconfigured.</p>
+</div>
+<h3 id='SECURITY-932'>
+TraceTronic ECU-TEST Plugin globally and unconditionally disables SSL/TLS certificate validation
+</h3>
+<strong>
+SECURITY-932
+/
+CVE-2018-1999025
+</strong>
+<div class="paragraph">
+<p>TraceTronic ECU-TEST Plugin unconditionally disabled SSL/TLS certificate validation for the entire Jenkins master JVM.</p>
+</div>
+<div class="paragraph">
+<p>TraceTronic ECU-TEST Plugin 2.4 and newer no longer does that.
+It now has an option that allows disabling SSL/TLS certificate validation for specific connections by this plugin.</p>
+</div>
+<h3 id='SECURITY-994'>
+CSRF vulnerability and missing permission checks in TraceTronic ECU-TEST Plugin allowed server-side request forgery
+</h3>
+<strong>
+SECURITY-994
+/
+CVE-2018-1999026
+</strong>
+<div class="paragraph">
+<p>TraceTronic ECU-TEST Plugin did not perform permission checks on a method implementing form validation.
+This allowed users with Overall/Read access to Jenkins to connect to an attacker-specified URL, with the suffix <code>/app-version-info</code> appended.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this form validation method did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This form validation method now requires POST requests and Overall/Administer permissions.</p>
+</div>
+<h3 id='SECURITY-1009'>
+CSRF vulnerability and missing permission checks in SaltStack Plugin allowed capturing credentials
+</h3>
+<strong>
+SECURITY-1009
+/
+CVE-2018-1999027
+</strong>
+<div class="paragraph">
+<p>SaltStack Plugin did not perform permission checks on methods implementing form validation.
+This allowed users with Overall/Read access to Jenkins to connect to an attacker-specified URL using attacker-specified credentials IDs obtained through another method, capturing credentials stored in Jenkins, and to cause Jenkins to submit HTTP requests to attacker-specified URLs.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, these form validation methods did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>These form validation methods now require POST requests and Overall/Administer permissions.</p>
+</div>
+<h3 id='SECURITY-1021'>
+CSRF vulnerability and missing permission checks in Accurev Plugin allowed capturing credentials
+</h3>
+<strong>
+SECURITY-1021
+/
+CVE-2018-1999028
+</strong>
+<div class="paragraph">
+<p>Accurev Plugin did not perform permission checks on a method implementing form validation.
+This allowed users with Overall/Read access to Jenkins to connect to an attacker-specified Accurev server using attacker-specified credentials IDs obtained through another method, capturing credentials stored in Jenkins.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, these form validation methods did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>These form validation methods now require POST requests and Overall/Administer permissions.</p>
+</div>
+<h3 id='SECURITY-1001'>
+Stored Cross-Site Scripting Vulnerability in Shelve Project Plugin
+</h3>
+<strong>
+SECURITY-1001
+/
+CVE-2018-1999029
+</strong>
+<div class="paragraph">
+<p>Shelve Project Plugin did not escape the names of shelved projects on the UI, potentially resulting in a stored XSS vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>Shelve Project Plugin 2.0 and newer now escapes the names of shelved projects shown on the UI.</p>
+</div>
+<h3 id='SECURITY-1022'>
+CSRF vulnerability and missing permission checks in Maven Artifact ChoiceListProvider (Nexus) Plugin allowed capturing credentials
+</h3>
+<strong>
+SECURITY-1022
+/
+CVE-2018-1999030
+</strong>
+<div class="paragraph">
+<p>Maven Artifact ChoiceListProvider (Nexus) Plugin did not perform permission checks on a method implementing form validation.
+This allowed users with Overall/Read access to Jenkins to connect to an attacker-specified Nexus or Artifactory server using attacker-specified credentials IDs obtained through another method, capturing credentials stored in Jenkins.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this form validation method did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This form validation method now requires POST requests and Overall/Administer permissions.</p>
+</div>
+<h3 id='SECURITY-847'>
+meliora-testlab Plugin stored API Key in plain text
+</h3>
+<strong>
+SECURITY-847
+/
+CVE-2018-1999031
+</strong>
+<div class="paragraph">
+<p>meliora-testlab Plugin stored the API Key in its configuration unencrypted in its global configuration file on the Jenkins master.
+This key could be viewed by users with access to the master file system.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, the API key was not masked from view using a password form field.</p>
+</div>
+<div class="paragraph">
+<p>The plugin now stores the API Key encrypted in the configuration files on disk and no longer transfers it to users viewing the configuration form in plain text.</p>
+</div>
+<h3 id='SECURITY-995'>
+CSRF vulnerability and missing permission checks in Agiletestware Pangolin Connector for TestRail Plugin allowed overriding plugin configuration
+</h3>
+<strong>
+SECURITY-995
+/
+CVE-2018-1999032
+</strong>
+<div class="paragraph">
+<p>Agiletestware Pangolin Connector for TestRail Plugin did not perform permission checks on an API endpoint used to validate and save the plugin configuration.
+This allowed users with Overall/Read access to Jenkins to override the plugin configuration.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, the API endpoint did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This API endpoint now requires POST requests and Overall/Administer permissions.</p>
+</div>
+<h3 id='SECURITY-1039'>
+Anchore Container Image Scanner Plugin stored password in plain text
+</h3>
+<strong>
+SECURITY-1039
+/
+CVE-2018-1999033
+</strong>
+<div class="paragraph">
+<p>Anchore Container Image Scanner Plugin stored the password in its configuration unencrypted in its global configuration file on the Jenkins master.
+This password could be viewed by users with access to the master file system.</p>
+</div>
+<div class="paragraph">
+<p>The plugin now stores the password encrypted in the configuration files on disk and no longer transfers it to users viewing the configuration form in plain text.</p>
+</div>
+<h3 id='SECURITY-933'>
+Inedo ProGet Plugin globally and unconditionally disabled SSL/TLS certificate validation
+</h3>
+<strong>
+SECURITY-933
+/
+CVE-2018-1999034
+</strong>
+<div class="paragraph">
+<p>Inedo ProGet Plugin unconditionally disabled SSL/TLS certificate validation for the entire Jenkins master JVM.</p>
+</div>
+<div class="paragraph">
+<p>The plugin now has an option, disabled by default, to disable SSL/TLS certificate validation that only applies to its own connections.</p>
+</div>
+<h3 id='SECURITY-935'>
+Inedo BuildMaster Plugin globally and unconditionally disabled SSL/TLS certificate validation
+</h3>
+<strong>
+SECURITY-935
+/
+CVE-2018-1999035
+</strong>
+<div class="paragraph">
+<p>Inedo ProGet Plugin unconditionally disabled SSL/TLS certificate validation for the entire Jenkins master JVM.</p>
+</div>
+<div class="paragraph">
+<p>The plugin now has an option, disabled by default, to disable SSL/TLS certificate validation that only applies to its own connections.</p>
+</div>
+<h2>
+Severity
+</h2>
+<ul>
+<li>
+SECURITY-704:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+low
+</a>
+</li>
+<li>
+SECURITY-840:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+low
+</a>
+</li>
+<li>
+SECURITY-847:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+low
+</a>
+</li>
+<li>
+SECURITY-932:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-933:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-935:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-975:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-982:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-994:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-995:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:L'>
+medium
+</a>
+</li>
+<li>
+SECURITY-997:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:L'>
+low
+</a>
+</li>
+<li>
+SECURITY-1001:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1009:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1016:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1021:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1022:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1039:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+low
+</a>
+</li>
+</ul>
+<h2>
+Fix
+</h2>
+<ul>
+<li>
+<strong>
+CloudBees Traditional Platforms
+</strong>
+should be upgraded 2.121.2.1 revision 3
+</li>
+<li>
+<strong>
+CloudBees Cloud Platforms
+</strong>
+should be upgraded 2.121.2.1 revision 3
+</li>
+<li>
+<strong>
+CloudBees Jenkins Enterprise
+</strong>
+should be upgraded the Managed Masters and Operations Center to 2.121.2.1 revision 3
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(rolling train, CJP Operations Center and CJP Client Master (2.x.y.z) should be upgraded to version 2.121.2.1 revision 3
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(fixed train, CJP Operations Center and CJP Client Master (2.107.x.0.z) should be upgraded to version 2.107.33.0.1 revision 2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(fixed train, CJP Operations Center and CJP Client Master (2.73.x.0.z) should be upgraded to version 2.73.34.0.1 revision 2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Team
+</strong>
+should be upgraded to version 2.121.2.1 revision 3
+</li>
+<li>
+<strong>
+DEV@cloud
+</strong>
+is already protected
+</li>
+</ul>

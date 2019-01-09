@@ -1,0 +1,233 @@
+<h1>
+CloudBees Security Advisory 2018-10-10
+</h1>
+<p>
+This advisory announces vulnerabilities in
+<strong>
+Jenkins, CloudBees Jenkins Platform
+</strong>
+and
+<strong>
+CloudBees Jenkins Solutions.
+</strong>
+</p>
+<h3 id='SECURITY-867'>
+Path traversal vulnerability in Stapler allowed accessing internal data
+</h3>
+<strong>
+SECURITY-867
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>A path traversal vulnerability in Stapler allowed viewing routable objects with views defined on any type.
+This could be used to access internal data of routable objects, commonly by showing their string representation (<code>#toString()</code>).</p>
+</div>
+<h3 id='SECURITY-1074'>
+Arbitrary file write vulnerability using file parameter definitions
+</h3>
+<strong>
+SECURITY-1074
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Users with Job/Configure permission could specify a relative path escaping the base directory in the file name portion of a file parameter definition.
+This path would be used to archive the uploaded file on the Jenkins master, resulting in an arbitrary file write vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>File parameters that escape the base directory are no longer accepted and the build will fail.</p>
+</div>
+<h3 id='SECURITY-1129'>
+Reflected XSS vulnerability
+</h3>
+<strong>
+SECURITY-1129
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>The <code>wrapper</code> query parameter for the XML variant of the Jenkins remote API did not validate the specified tag name.
+This resulted in a reflected cross-site scripting vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>Only legal XML tag names are now allowed for the <code>wrapper</code> query parameter.</p>
+</div>
+<h3 id='SECURITY-1162'>
+Ephemeral user record was created on some invalid authentication attempts
+</h3>
+<strong>
+SECURITY-1162
+/
+CVE-2018-1999043
+</strong>
+<div class="paragraph">
+<p>When attempting to authenticate using API token, an ephemeral user record was created to validate the token in case an external security realm was used, and the user record in Jenkins not previously saved, as (legacy) API tokens could exist without a persisted user record.</p>
+</div>
+<div class="paragraph">
+<p>This behavior could be abused to create a large number of ephemeral user records in memory.</p>
+</div>
+<div class="paragraph">
+<p>This is the same vulnerability as <a href="/security/advisory/2018-08-15/#SECURITY-672">SECURITY-672</a>.
+The fix for SECURITY-672 was previously incorrectly applied and therefore not effective.
+This has been fixed.</p>
+</div>
+<h3 id='SECURITY-1128'>
+Ephemeral user record creation
+</h3>
+<strong>
+SECURITY-1128
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>By accessing a specific crafted URL on Jenkins instances using <em>Jenkins' own user database</em>, users without Overall/Read access could create ephemeral user records.</p>
+</div>
+<div class="paragraph">
+<p>This behavior could be abused to create a large number of ephemeral user records in memory.</p>
+</div>
+<div class="paragraph">
+<p>Accessing this URL now no longer results in a user record getting created.</p>
+</div>
+<h3 id='SECURITY-1158'>
+Session fixation vulnerability on user signup
+</h3>
+<strong>
+SECURITY-1158
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>When signing up for a new user account on instances using <em>Jenkins' own user database</em>, Jenkins did not invalidate the existing session and create a new one.
+This allowed session fixation.</p>
+</div>
+<div class="paragraph">
+<p>Jenkins now invalidates the existing session and creates a new one when logging in after user signup.</p>
+</div>
+<h3 id='SECURITY-765'>
+Failures to process form submission data could result in secrets being displayed or written to logs
+</h3>
+<strong>
+SECURITY-765
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>When Jenkins fails to process form submissions due to an internal error, the error message shown to the user and written to the log typically includes the serialized JSON form submission.
+Secrets, such as submitted passwords, might be included with the JSON object, and shown or written to disk in plain text.</p>
+</div>
+<div class="paragraph">
+<p>Jenkins now masks values in these error messages from view if they were shown on the UI as password form fields.</p>
+</div>
+<h2>
+Severity
+</h2>
+<ul>
+<li>
+SECURITY-765:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:L/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N'>
+low
+</a>
+</li>
+<li>
+SECURITY-867:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1074:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1128:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1129:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1158:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1162:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L'>
+medium
+</a>
+</li>
+</ul>
+<h2>
+Fix
+</h2>
+<ul>
+<li>
+<strong>
+CloudBees Traditional Platforms
+</strong>
+should be upgraded 2.138.2.2
+</li>
+<li>
+<strong>
+CloudBees Cloud Platforms
+</strong>
+should be upgraded 2.138.2.2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Enterprise
+</strong>
+should be upgraded the Managed Masters and Operations Center to 2.138.2.2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(rolling train, CJP Operations Center and CJP Client Master (2.x.y.z) should be upgraded to version 2.138.2.2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(fixed train, CJP Operations Center and CJP Client Master (2.107.x.0.z) should be upgraded to version 2.107.35.0.1
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(fixed train, CJP Operations Center and CJP Client Master (2.73.x.0.z) should be upgraded to version 2.73.36.0.2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Team
+</strong>
+should be upgraded to version 2.138.2.2
+</li>
+<li>
+<strong>
+Jenkins weekly
+</strong>
+should be updated to version 2.146
+</li>
+<li>
+<strong>
+Jenkins LTS
+</strong>
+should be updated to version 2.138.2
+</li>
+<li>
+<strong>
+DEV@cloud
+</strong>
+is already protected
+</li>
+</ul>

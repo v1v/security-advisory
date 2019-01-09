@@ -1,0 +1,213 @@
+<h1>
+CloudBees Security Advisory 2018-08-15
+</h1>
+<p>
+This advisory announces vulnerabilities in
+<strong>
+Jenkins, CloudBees Jenkins Platform
+</strong>
+and
+<strong>
+CloudBees Jenkins Solutions.
+</strong>
+</p>
+<h3 id='SECURITY-637'>
+Jenkins allowed deserialization of <code>URL</code> objects with host components
+</h3>
+<strong>
+SECURITY-637
+/
+CVE-2018-1999042
+</strong>
+<div class="paragraph">
+<p>Jenkins allowed deserialization of <code>URL</code> objects via Remoting (agent communication) and XStream.</p>
+</div>
+<div class="paragraph">
+<p>This could in rare cases be used by attackers to have Jenkins look up specified hosts' DNS records.</p>
+</div>
+<div class="paragraph">
+<p>Jenkins now injects a <code>URLStreamHandler</code> when deserializing URLs that overrides the affected <code>URL</code> methods.</p>
+</div>
+<div class="paragraph">
+<p>This can be disabled if needed by setting the system property <code>hudson.remoting.URLDeserializationHelper.avoidUrlWrapping</code> to <code>true</code>.</p>
+</div>
+<h3 id='SECURITY-672'>
+Ephemeral user record was created on some invalid authentication attempts
+</h3>
+<strong>
+SECURITY-672
+/
+CVE-2018-1999043
+</strong>
+<div class="paragraph">
+<p>When attempting to authenticate using API token, an ephemeral user record was created to validate the token in case an external security realm was used, and the user record in Jenkins not previously saved, as (legacy) API tokens could exist without a persisted user record.</p>
+</div>
+<div class="paragraph">
+<p>This behavior could be abused to create a large number of ephemeral user records in memory.</p>
+</div>
+<div class="paragraph">
+<p>The API token validation on authentication has been improved to no longer create ephemeral user records.</p>
+</div>
+<h3 id='SECURITY-790'>
+Cron expression form validation could enter infinite loop, potentially resulting in denial of service
+</h3>
+<strong>
+SECURITY-790
+/
+CVE-2018-1999044
+</strong>
+<div class="paragraph">
+<p>The form validation for cron expressions (e.g. "Poll SCM", "Build periodically") could enter infinite loops when cron expressions only matching certain rare dates were entered, blocking request handling threads indefinitely.</p>
+</div>
+<h3 id='SECURITY-996'>
+"Remember me" cookie was evaluated even if that feature is disabled
+
+</h3>
+<strong>
+SECURITY-996
+/
+CVE-2018-1999045
+</strong>
+<div class="paragraph">
+<p>The "Remember me" feature can be disabled in the Jenkins security configuration.</p>
+</div>
+<div class="paragraph">
+<p>This did not disable the processing of previously set "Remember me" cookies, so they still allowed users to be logged in.</p>
+</div>
+<div class="paragraph">
+<p>"Remember me" cookies are no longer evaluated when the corresponding feature is disabled.</p>
+</div>
+<h3 id='SECURITY-1071'>
+Unauthorized users could access agent logs
+</h3>
+<strong>
+SECURITY-1071
+/
+CVE-2018-1999046
+</strong>
+<div class="paragraph">
+<p>Users with Overall/Read permission were able to access the URL serving agent logs on the UI due to a lack of permission checks.</p>
+</div>
+<div class="paragraph">
+<p>Access to the affected URL is now limited to users with the correct Agent/Connect permission.</p>
+</div>
+<h3 id='SECURITY-1076'>
+Unauthorized users could cancel scheduled restarts initiated from the update center
+</h3>
+<strong>
+SECURITY-1076
+/
+CVE-2018-1999047
+</strong>
+<div class="paragraph">
+<p>Users with Overall/Read permission were able to access the URL used to cancel scheduled restart jobs initiated via the update center ("Restart Jenkins when installation is complete and no jobs are running") due to a lack of permission checks.</p>
+</div>
+<div class="paragraph">
+<p>Access to the affected URL is now limited to users with Overall/Administer permission.</p>
+</div>
+<h2>
+Severity
+</h2>
+<ul>
+<li>
+SECURITY-637:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N'>
+low
+</a>
+</li>
+<li>
+SECURITY-672:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L'>
+medium
+</a>
+</li>
+<li>
+SECURITY-790:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H'>
+medium
+</a>
+</li>
+<li>
+SECURITY-996:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+low
+</a>
+</li>
+<li>
+SECURITY-1071:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1076:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:L'>
+low
+</a>
+</li>
+</ul>
+<h2>
+Fix
+</h2>
+<ul>
+<li>
+<strong>
+CloudBees Traditional Platforms
+</strong>
+should be upgraded 2.121.3.1
+</li>
+<li>
+<strong>
+CloudBees Cloud Platforms
+</strong>
+should be upgraded 2.121.3.1
+</li>
+<li>
+<strong>
+CloudBees Jenkins Enterprise
+</strong>
+should be upgraded the Managed Masters and Operations Center to 2.121.3.1
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(rolling train, CJP Operations Center and CJP Client Master (2.x.y.z) should be upgraded to version 2.121.3.1
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(fixed train, CJP Operations Center and CJP Client Master (2.107.x.0.z) should be upgraded to version 2.107.34.0.1
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(fixed train, CJP Operations Center and CJP Client Master (2.73.x.0.z) should be upgraded to version 2.73.35.0.1
+</li>
+<li>
+<strong>
+CloudBees Jenkins Team
+</strong>
+should be upgraded to version 2.121.3.1
+</li>
+<li>
+<strong>
+Jenkins weekly
+</strong>
+should be updated to version 2.138
+</li>
+<li>
+<strong>
+Jenkins LTS
+</strong>
+should be updated to version 2.121.3
+</li>
+<li>
+<strong>
+DEV@cloud
+</strong>
+is already protected
+</li>
+</ul>
