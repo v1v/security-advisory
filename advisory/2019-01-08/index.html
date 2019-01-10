@@ -1,0 +1,85 @@
+<h1>
+CloudBees Security Advisory 2019-01-08
+</h1>
+<p>
+This advisory announces vulnerabilities in
+<strong>
+Jenkins, CloudBees Jenkins Platform
+</strong>
+and
+<strong>
+CloudBees Jenkins Solutions.
+</strong>
+</p>
+<h3 id='SECURITY-1266'>
+Sandbox Bypass in Script Security and Pipeline Plugins
+</h3>
+<strong>
+SECURITY-1266
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Script Security sandbox protection could be circumvented during the script compilation phase by applying AST transforming annotations such as <code>@Grab</code> to source code elements.</p>
+</div>
+<div class="paragraph">
+<p>Both the pipeline validation REST APIs and actual script/pipeline execution are affected.</p>
+</div>
+<div class="paragraph">
+<p>This allowed users with Overall/Read permission, or able to control Jenkinsfile or sandboxed Pipeline shared library contents in SCM, to bypass the sandbox protection and execute arbitrary code on the Jenkins master.</p>
+</div>
+<div class="paragraph">
+<p>All known unsafe AST transformations in Groovy are now prohibited in sandboxed scripts.</p>
+</div>
+<h2>
+Severity
+</h2>
+<ul>
+<li>
+SECURITY-1266:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H'>
+High
+</a>
+</li>
+</ul>
+<h2>
+Fix
+</h2>
+<ul>
+<li>
+<strong>
+CloudBees Traditional Platforms
+</strong>
+should be upgraded 2.138.4.3-rev3
+</li>
+<li>
+<strong>
+CloudBees Cloud Platforms
+</strong>
+should be upgraded 2.138.4.3-rev3
+</li>
+<li>
+<strong>
+CloudBees Jenkins Enterprise
+</strong>
+should be upgraded the Managed Masters and Operations Center to 2.138.4.3-rev3
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(rolling train, CJP Operations Center and CJP Client Master (2.x.y.z) should be upgraded to version 2.138.4.3-rev3
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(fixed train, CJP Operations Center and CJP Client Master (2.107.x.0.z) should be upgraded to version 2.107.36.0.2-rev2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Team
+</strong>
+should be upgraded to version 2.138.4.3-rev3
+</li>
+</ul>
