@@ -1,0 +1,117 @@
+<h1>
+CloudBees Security Advisory 2019-01-16
+</h1>
+<p>
+This advisory announces vulnerabilities in
+<strong>
+Jenkins, CloudBees Jenkins Platform
+</strong>
+and
+<strong>
+CloudBees Jenkins Solutions.
+</strong>
+</p>
+<h3 id='SECURITY-868'>
+Administrators could persist access to Jenkins using crafted 'Remember me' cookie
+</h3>
+<strong>
+SECURITY-868
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Users with the Overall/RunScripts permission (typically administrators) were able to use the Jenkins script console to craft a 'Remember me' cookie that would never expire.</p>
+</div>
+<div class="paragraph">
+<p>This allowed attackers access to a Jenkins instance while the corresponding user in the configured security realm exists, for example to persist access after another successful attack.</p>
+</div>
+<div class="paragraph">
+<p>Jenkins now encodes a per-user seed value in 'Remember me' cookies that is invalidated when the user password in the Jenkins user database is changed, the user record in Jenkins is deleted, or when all sessions for a given user are terminated through a new feature on the user&#8217;s configuration page.</p>
+</div>
+<h3 id='SECURITY-901'>
+Deleting a user in an external security realm did not invalidate their session or 'Remember me' cookie
+</h3>
+<strong>
+SECURITY-901
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>When using an external security realm such as LDAP or Active Directory, deleting a user from the security realm does not result in the user losing access to Jenkins.</p>
+</div>
+<div class="paragraph">
+<p>While deleting the user record from Jenkins did invalidate the 'Remember me' cookie, there was no way to invalidate active sessions besides restarting Jenkins or terminating sessions through other means, such as Monitoring Plugin.</p>
+</div>
+<div class="paragraph">
+<p>Jenkins now encodes a per-user seed value in sessions, 'Remember me' cookies, and cached authentications of the remoting-based CLI, that can manually be reset by a user themselves, or an administrator, on the user&#8217;s configuration page. Doing so will invalidate all current sessions, 'Remember me' cookies, and cached CLI authentications, requiring credentials to be entered again to authenticate. Deleting a user record in Jenkins will now also invalidate existing sessions, as the current seed value is deleted as well.</p>
+</div>
+<h2>
+Severity
+</h2>
+<ul>
+<li>
+SECURITY-868:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H'>
+high
+</a>
+</li>
+<li>
+SECURITY-901:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:H/UI:R/S:U/C:H/I:H/A:H'>
+medium
+</a>
+</li>
+</ul>
+<h2>
+Fix
+</h2>
+<ul>
+<li>
+<strong>
+CloudBees Traditional Platforms
+</strong>
+should be upgraded 2.150.2.3
+</li>
+<li>
+<strong>
+CloudBees Cloud Platforms
+</strong>
+should be upgraded 2.150.2.3
+</li>
+<li>
+<strong>
+CloudBees Jenkins Enterprise
+</strong>
+should be upgraded the Managed Masters and Operations Center to 2.150.2.3
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(rolling train, CJP Operations Center and CJP Client Master (2.x.y.z) should be upgraded to version 2.150.2.3
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(fixed train, CJP Operations Center and CJP Client Master (2.107.x.0.z) should be upgraded to version 2.107.37.0.2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Team
+</strong>
+should be upgraded to version 2.150.2.3
+</li>
+<li>
+<strong>
+Jenkins weekly
+</strong>
+should be updated to version 2.160
+</li>
+<li>
+<strong>
+Jenkins LTS
+</strong>
+should be updated to version 2.150.2
+</li>
+</ul>
