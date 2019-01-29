@@ -1,0 +1,513 @@
+<h1>
+CloudBees Security Advisory 2019-01-28
+</h1>
+<p>
+This advisory announces vulnerabilities in
+<strong>
+Jenkins, CloudBees Jenkins Platform
+</strong>
+and
+<strong>
+CloudBees Jenkins Solutions.
+</strong>
+</p>
+<h3 id='SECURITY-1292'>
+Sandbox Bypass in Script Security Plugin
+</h3>
+<strong>
+SECURITY-1292
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Script Security sandbox protection could be circumvented during the script compilation phase by applying AST transforming annotations such as <code>@Grab</code> to source code elements.</p>
+</div>
+<div class="paragraph">
+<p>This affected an HTTP endpoint used to validate a user-submitted Groovy script that was not covered in the <a href="../2019-01-08/#SECURITY-1266">2019-01-08 fix for SECURITY-1266</a> and allowed users with Overall/Read permission to bypass the sandbox protection and execute arbitrary code on the Jenkins master.</p>
+</div>
+<div class="paragraph">
+<p>The affected HTTP endpoint now applies a safe Groovy compiler configuration prohibiting unsafe AST transforming annotations.</p>
+</div>
+<h3 id='SECURITY-1293'>
+Sandbox Bypass in Groovy Plugin
+</h3>
+<strong>
+SECURITY-1293
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Groovy Plugin has a form validation HTTP endpoint used to validate a user-submitted Groovy script through compilation, which was not subject to sandbox protection.
+This allowed attackers with Overall/Read access to execute arbitrary code on the Jenkins master by applying AST transforming annotations such as <code>@Grab</code> to source code elements.</p>
+</div>
+<div class="paragraph">
+<p>The affected HTTP endpoint now applies a safe Groovy compiler configuration preventing the use of unsafe AST transforming annotations.</p>
+</div>
+<h3 id='SECURITY-1295 (1)'>
+Sandbox Bypass via CSRF in Warnings Plugin
+</h3>
+<strong>
+SECURITY-1295 (1)
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Warnings Plugin has a form validation HTTP endpoint used to validate a user-submitted Groovy script through compilation, which was not subject to sandbox protection.
+The endpoint checked for the Overall/RunScripts permission, but did not require POST requests, so it was vulnerable to cross-site request forgery (CSRF).
+This allowed attackers to execute arbitrary code on the Jenkins master by applying AST transforming annotations such as <code>@Grab</code> to source code elements.</p>
+</div>
+<div class="paragraph">
+<p>The affected HTTP endpoint now applies a safe Groovy compiler configuration preventing the use of unsafe AST transforming annotations.
+Additionally, the form validation HTTP endpoint now requires that requests be sent via POST to prevent CSRF.</p>
+</div>
+<h3 id='SECURITY-1295 (2)'>
+Sandbox Bypass via CSRF in Warnings Next Generation Plugin
+</h3>
+<strong>
+SECURITY-1295 (2)
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Warnings Next Generation Plugin has a form validation HTTP endpoint used to validate a Groovy script through compilation, which was not subject to sandbox protection.
+The endpoint checked for the Overall/RunScripts permission, but did not require POST requests, so it was vulnerable to cross-site request forgery (CSRF).
+This allowed attackers to execute arbitrary code on the Jenkins master by applying AST transforming annotations such as <code>@Grab</code> to source code elements.</p>
+</div>
+<div class="paragraph">
+<p>The affected HTTP endpoint now applies a safe Groovy compiler configuration preventing the use of unsafe AST transforming annotations.
+Additionally, the form validation HTTP endpoint now requires that requests be sent via POST to prevent CSRF.</p>
+</div>
+<h3 id='SECURITY-859'>
+Improper certificate validation with StartTLS in Active Directory Plugin
+</h3>
+<strong>
+SECURITY-859
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Active Directory Plugin performs TLS upgrade (StartTLS) after connecting to domain controllers through insecure LDAP.
+In this mode, certificates were not properly validated, effectively trusting all certificates, allowing man-in-the-middle attacks.</p>
+</div>
+<div class="paragraph">
+<p>This only affected TLS upgrades.
+The LDAPS mode, available by setting the system property <code>hudson.plugins.active_directory.ActiveDirectorySecurityRealm.forceLdaps</code> to <code>true</code>, was unaffected.</p>
+</div>
+<div class="paragraph">
+<p>The plugin now properly validates certificates according to the TLS trust configuration when performing a TLS upgrade.</p>
+</div>
+<h3 id='SECURITY-1095'>
+CSRF vulnerability in Git Plugin
+</h3>
+<strong>
+SECURITY-1095
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Git Plugin allows the creation of a tag in a job workspace&#8217;s Git repository with accompanying metadata attached to a build record.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP endpoint to create the tag did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP endpoint to create the tag now requires that requests are sent via POST.</p>
+</div>
+<h3 id='SECURITY-1102'>
+Recursive token expansion results in information disclosure and DoS in Token Macro Plugin
+</h3>
+<strong>
+SECURITY-1102
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Token Macro Plugin recursively applied token expansion.</p>
+</div>
+<div class="paragraph">
+<p>This could be used by users able to affect input to token expansion (such as change log messages), to inject additional tokens into the input, which would then be expanded, resulting in information disclosure (for example values of environment variables), or denial of service.</p>
+</div>
+<div class="paragraph">
+<p>Most tokens have been changed to no longer recursively apply token expansion.</p>
+</div>
+<h3 id='SECURITY-1201'>
+Blue Ocean did not require CSRF tokens
+</h3>
+<strong>
+SECURITY-1201
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Blue Ocean did not require CSRF tokens ("crumbs") for POST requests with the <code>Content-Type: application/json</code>.</p>
+</div>
+<div class="paragraph">
+<p>Blue Ocean now requires that valid CSRF tokens are present in POST requests.</p>
+</div>
+<h3 id='SECURITY-1204'>
+XSS vulnerability via user description in Blue Ocean
+</h3>
+<strong>
+SECURITY-1204
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Blue Ocean did not properly escape HTML/JavaScript content set on the current user&#8217;s description field, resulting in a cross-site scripting vulnerability exploitable by administrators and other people accessing Jenkins with the same user account.</p>
+</div>
+<div class="paragraph">
+<p>Blue Ocean now properly escapes HTML/JavaScript content set on the current user&#8217;s description field.</p>
+</div>
+<h3 id='SECURITY-1253'>
+XSS vulnerability in Config File Provider Plugin
+</h3>
+<strong>
+SECURITY-1253
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Config File Provider Plugin improperly handled script names in its JavaScript-based UI, resulting in a stored cross-site scripting (XSS) vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>Config File Provider Plugin now properly handles script names.</p>
+</div>
+<h3 id='SECURITY-905 (1)'>
+XXE vulnerability in Job Import Plugin
+</h3>
+<strong>
+SECURITY-905 (1)
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Job Import Plugin allows to import jobs from other Jenkins instances.
+As a first step in this process, Job Import Plugin sends a request to another Jenkins instance, parsing XML REST API output to obtain a list of jobs that could be imported.</p>
+</div>
+<div class="paragraph">
+<p>Job Import Plugin did not configure the XML parser in a way that would prevent XML External Entity (XXE) processing.
+This allowed attackers able to control either the server Jenkins will query, or the URL Jenkins queries, to have it parse a maliciously crafted XML response that uses external entities for extraction of secrets from the Jenkins master, server-side request forgery, or denial-of-service attacks.</p>
+</div>
+<div class="paragraph">
+<p>External entity resolution has been disabled for the XML parser used in Job Import Plugin 3.0.</p>
+</div>
+<h3 id='SECURITY-905 (2)'>
+CSRF vulnerability and missing permission checks in Job Import Plugin allowed capturing credentials
+</h3>
+<strong>
+SECURITY-905 (2)
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Job Import Plugin did not check user permissions on its API endpoint used to access remote Jenkins instances.
+    This allowed users with Overall/Read access to Jenkins to connect to an attacker-specified URL using attacker-specified credentials IDs obtained through another method, capturing credentials stored in Jenkins.</p>
+</div>
+<div class="paragraph">
+<p>Job Import Plugin 3.0 will only access Jenkins instances using credentials defined in the global configuration.</p>
+</div>
+<h3 id='SECURITY-1302'>
+CSRF vulnerability in Job Import Plugin allowed creating and overwriting jobs, installing some plugins
+</h3>
+<strong>
+SECURITY-1302
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Job Import Plugin did not require that POST requests are sent to its <code>/import</code> URL, which processes requests to import jobs.
+This resulted in a cross-site request forgery (CSRF) vulnerability that could be exploited to create or replace jobs on the local instance if the remote Jenkins instance has different ones with the same name, or to install additional plugins, if jobs on the remote Jenkins instance reference them in their configuration.</p>
+</div>
+<div class="paragraph">
+<p>Job Import Plugin 3.0 restricted which remote Jenkins instances jobs can be imported from, limiting how this can be exploited.
+From Job Import Plugin 3.1, the <code>/import</code> URL requires that requests are sent via POST.</p>
+</div>
+<h3 id='SECURITY-602'>
+GitHub Authentication Plugin showed plain text client secret in configuration form
+</h3>
+<strong>
+SECURITY-602
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>GitHub Authentication Plugin stores the client secret in the global Jenkins configuration.</p>
+</div>
+<div class="paragraph">
+<p>While the client secret is stored encrypted on disk, it was transmitted in plain text as part of the configuration form and displayed without masking.
+This could result in exposure of the client secret through browser extensions, cross-site scripting vulnerabilities, and similar situations.</p>
+</div>
+<div class="paragraph">
+<p>GitHub Authentication Plugin now encrypts the client secret transmitted to administrators viewing the global security configuration form.</p>
+</div>
+<h3 id='SECURITY-797'>
+Session fixation vulnerability in GitHub Authentication Plugin
+</h3>
+<strong>
+SECURITY-797
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>GitHub Authentication Plugin did not invalidate the previous session and create a new one upon successful login, allowing attackers able to control or obtain another user&#8217;s pre-login session ID to impersonate them.</p>
+</div>
+<div class="paragraph">
+<p>GitHub Authentication Plugin now invalidates the previous session during login and creates a new one.</p>
+</div>
+<h3 id='SECURITY-818'>
+CSRF vulnerability and missing permission checks in Kanboard Plugin allowed server-side request forgery
+</h3>
+<strong>
+SECURITY-818
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Kanboard Plugin did not perform permission checks on a method implementing form validation.
+This allowed users with Overall/Read access to Jenkins to submit a GET request to an attacker-specified URL.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this form validation method did not require POST requests, resulting in a CSRF vulnerability.</p>
+</div>
+<div class="paragraph">
+<p>This form validation method now requires POST requests and Overall/Administer permissions.</p>
+</div>
+<h3 id='SECURITY-886'>
+OpenId Connect Authentication Plugin showed plain text client secret in configuration form
+</h3>
+<strong>
+SECURITY-886
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>OpenId Connect Authentication Plugin stores the client secret in the global Jenkins configuration.</p>
+</div>
+<div class="paragraph">
+<p>While the client secret is stored encrypted on disk, it was transmitted in plain text as part of the configuration form and displayed without masking.
+This could result in exposure of the client secret through browser extensions, cross-site scripting vulnerabilities, and similar situations.</p>
+</div>
+<div class="paragraph">
+<p>The OpenId Connect Authentication Plugin now encrypts the client secret transmitted to administrators viewing the global configuration form.</p>
+</div>
+<h3 id='SECURITY-1153'>
+Monitoring Plugin did not apply CSRF protection even if enabled in Jenkins
+</h3>
+<strong>
+SECURITY-1153
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Monitoring Plugin provides a standalone JavaMelody servlet with an independent CSRF protection configuration.
+Even if Jenkins had CSRF protection enabled, Monitoring Plugin may not have it enabled.</p>
+</div>
+<div class="paragraph">
+<p>Monitoring Plugin now checks on startup whether Jenkins has CSRF protection enabled and enables its own CSRF protection accordingly.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Monitoring Plugin does not take into account configuration changes applied after Jenkins startup or after Monitoring Plugin finishes loading.
+Administrators need to restart Jenkins when enabling or disabling the CSRF protection configuration to apply the change to Monitoring Plugin.
+</td>
+</tr>
+</table>
+</div>
+<h3 id='SECURITY-1154'>
+Clickjacking vulnerability in Monitoring Plugin
+</h3>
+<strong>
+SECURITY-1154
+</strong>
+<div class="paragraph">
+<p>Monitoring Plugin did not set the <code>X-Frame-Options</code> header, allowing its pages to be embedded.
+This could result in clickjacking attacks.</p>
+</div>
+<div class="paragraph">
+<p>Monitoring Plugin now sets the <code>X-Frame-Options</code> header to <code>sameorigin</code>, preventing embedding.</p>
+</div>
+<h3 id='SECURITY-1271'>
+XSS vulnerability in Warnings Next Generation Plugin
+</h3>
+<strong>
+SECURITY-1271
+/
+CVE pending
+</strong>
+<div class="paragraph">
+<p>Warnings Next Generation Plugin did not properly escape HTML content in warnings displayed on the Jenkins UI, resulting in a cross-site scripting vulnerability exploitable by users able to control warnings parser input.</p>
+</div>
+<div class="paragraph">
+<p>Warnings Next Generation Plugin now removes unsafe HTML content from warnings.</p>
+</div>
+<h2>
+Severity
+</h2>
+<ul>
+<li>
+SECURITY-602:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N'>
+low
+</a>
+</li>
+<li>
+SECURITY-797:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-818:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-859:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N'>
+high
+</a>
+</li>
+<li>
+SECURITY-886:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N'>
+low
+</a>
+</li>
+<li>
+SECURITY-905 (1):
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:L'>
+high
+</a>
+</li>
+<li>
+SECURITY-905 (2):
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1095:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:N/I:L/A:N'>
+low
+</a>
+</li>
+<li>
+SECURITY-1102:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1153:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1154:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:N/I:N/A:L'>
+low
+</a>
+</li>
+<li>
+SECURITY-1201:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1204:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:H/UI:R/S:C/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1253:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:H/UI:R/S:C/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1271:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:N'>
+medium
+</a>
+</li>
+<li>
+SECURITY-1292:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H'>
+high
+</a>
+</li>
+<li>
+SECURITY-1293:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H'>
+high
+</a>
+</li>
+<li>
+SECURITY-1295 (1):
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H'>
+high
+</a>
+</li>
+<li>
+SECURITY-1295 (2):
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H'>
+high
+</a>
+</li>
+<li>
+SECURITY-1302:
+<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:L'>
+medium
+</a>
+</li>
+</ul>
+<h2>
+Fix
+</h2>
+<ul>
+<li>
+<strong>
+CloudBees Traditional Platforms
+</strong>
+should be upgraded 2.150.2.3-rev2
+</li>
+<li>
+<strong>
+CloudBees Cloud Platforms
+</strong>
+should be upgraded 2.150.2.3-rev2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Enterprise
+</strong>
+should be upgraded the Managed Masters and Operations Center to 2.150.2.3-rev2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(rolling train, CJP Operations Center and CJP Client Master (2.x.y.z) should be upgraded to version 2.150.2.3-rev2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Platform
+</strong>
+(fixed train, CJP Operations Center and CJP Client Master (2.107.x.0.z) should be upgraded to version 2.107.37.0.2-rev2
+</li>
+<li>
+<strong>
+CloudBees Jenkins Team
+</strong>
+should be upgraded to version 2.150.2.3-rev2
+</li>
+</ul>
