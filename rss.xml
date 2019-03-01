@@ -1,0 +1,44 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://www.cloudbees.com/jenkins/security-advisories</id>
+  <title type="text">CloudBees Security Advisories</title>
+  <subtitle>CloudBees security advisories.</subtitle>
+  <link rel="self" href="https://raw.githubusercontent.com/cloudbees/security-advisory/master/rss.xml" title="cloudbees security advisories feed"/>
+  <updated></updated>
+  <generator>Automation</generator>
+  <entry>
+    <author>
+      <name>CloudBees</name>
+    </author>
+    <id>https://raw.githubusercontent.com/cloudbees/security-advisory/master/advisory/2019-02-19/index.html</id>
+    <title type="text">CloudBees Security Advisory 2019-02-19</title>
+    <subtitle>This advisory announces vulnerabilities in Jenkins, CloudBees Jenkins Platform and CloudBees Jenkins Solutions. This advisory announces vulnerabilities in Jenkins, CloudBees Jenkins Platform and CloudBees Jenkins Solutions.</subtitle>
+    <updated>2019-02-19T00:00:00Z</updated>
+    <summary>CloudBees Security Advisory 2019-02-19</summary>
+    <security>Sandbox Bypasses in Script Security Plugin SECURITY-1320 / CVE pending</security>
+    <body>
+        The previously implemented script security sandbox protections prohibiting the use of unsafe AST transforming annotations such as @Grab (2019-01-08 fix for SECURITY-1266) could be circumvented through use of various Groovy language features: Use of AnnotationCollector Import aliasing Referencing annotation types using their full class name This allowed users with Overall/Read permission, or the ability to control Jenkinsfile or sandboxed Pipeline shared library contents in SCM, to bypass the sandbox protection and execute arbitrary code on the Jenkins master. Using AnnotationCollector is now newly prohibited in sandboxed scripts such as Pipelines. Importing any of the annotations considered unsafe will now result in an error. During the compilation phase, both simple and full class names of prohibited annotations are rejected for element annotations. CSRF vulnerability and missing permission checks in Cloud Foundry Plugin allowed capturing credentials
+    </body>
+
+    <severity>Severity</severity>
+    <list>
+        SECURITY-817:<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N'>medium</a>
+        SECURITY-876:<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N'>medium</a>
+        SECURITY-937:<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:L/A:N'>medium</a>
+        SECURITY-951:<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N'>low</a>
+        SECURITY-980:<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N'>medium</a>
+        SECURITY-985:<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N'>medium</a>
+        SECURITY-1033:<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N'>medium</a>
+        SECURITY-1070:<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N'>medium</a>
+        SECURITY-1320:<a href='http://www.first.org/cvss/calculator/3.0#CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H'>high</a>
+    </list>
+    <fix>Fix</fix>
+    <list>
+      CloudBees Traditional Platforms should be upgraded 2.150.3.2-rev2
+      CloudBees Cloud Platforms should be upgraded 2.150.3.2-rev2
+      CloudBees Jenkins Enterprise should be upgraded the Managed Masters and Operations Center to 2.150.3.2-rev2
+      CloudBees Jenkins Platform (rolling train, CJP Operations Center and CJP Client Master (2.x.y.z) should be upgraded to version 2.150.3.2-rev2
+      CloudBees Jenkins Platform (fixed train, CJP Operations Center and CJP Client Master (2.107.x.0.z) should be upgraded to version 2.107.37.0.2-rev3
+      CloudBees Jenkins Team should be upgraded to version 2.150.3.2-rev2
+    </list>
+  </entry>
+</feed>
